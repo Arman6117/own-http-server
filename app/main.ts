@@ -34,14 +34,14 @@ const server = net.createServer((socket) => {
         const userAgent = request.split("\r\n")[2];
         const userAgentMessage = userAgent.split(": ")[1];
         console.log(userAgentMessage);
-        response = `HTTP/1.1 404 Not Found\r\nContent-Type:text/plain\r\nContent-Length:${userAgentMessage.length}\r\n\r\n${userAgentMessage}`;
+        response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${userAgentMessage.length}\r\n\r\n${userAgentMessage}`;
         changeResponse(response);
         break;
 
       default:
          const defaultMessage = path.split('/')[1];
          
-         response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${defaultMessage.length}\r\n\r\n${defaultMessage}`;
+         response = `HTTP/1.1 404 Not Found\r\nContent-Type:text/plain\r\nContent-Length:${defaultMessage.length}\r\n\r\n${defaultMessage}`;
          changeResponse(response);
     }
   });
