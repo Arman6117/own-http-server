@@ -14,7 +14,8 @@ const server = net.createServer((socket) => {
 
     if(userAgent) {
       const message = userAgent[1];
-      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length-1}\r\n\r\n${message}`
+      const length = message.length-1
+      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${length}\r\n\r\n${message}`
 
       socket.write(response)
     }
