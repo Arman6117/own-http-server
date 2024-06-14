@@ -9,13 +9,13 @@ const server = net.createServer((socket) => {
     const request = data.toString();
 
 
-    const headers = request.split('\r\n')[2]
-    const userAgent = headers.split(':')
+    const headers = request.split('\r\n').find(header => header.startsWith('user-agent'))
+    const userAgent = headers?.split(': ')[1]
 
     if(userAgent) {
-      const message = userAgent[1];
-      const length = message.length-1
-      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${length}\r\n\r\n${message+1}`
+      const message = userAgent.trim();
+      const length = message.length
+      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${length}\r\n\r\n${message}`
 
       socket.write(response)
     }
