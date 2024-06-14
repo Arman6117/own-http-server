@@ -10,7 +10,7 @@ const server = net.createServer((socket) => {
 
 
     const headers = request.split('\r\n')[2]
-    const userAgent = headers.split(':')
+    const userAgent = headers.split(': ')
 
     if(userAgent) {
       const message = userAgent[1];
