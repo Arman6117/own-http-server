@@ -40,7 +40,9 @@ const server = net.createServer((socket) => {
       
       case 'files' : 
         const filePath = path
-        console.log(filePath);
+        const content = fs.readFileSync(filePath)
+
+        console.log(content)
          
       default:
          const defaultMessage = path.split('/')[1];
