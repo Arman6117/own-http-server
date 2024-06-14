@@ -50,7 +50,7 @@ const server = net.createServer((socket) => {
         response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${content.length}\r\n\r\n${content}`
         changeResponse(response);
       } catch (error) {
-        response = `HTTP/1.1 404 Not Found6\r\n\r\n`
+        response = `HTTP/1.1 404 Not Found\r\n\r\n`
         changeResponse(response);
       }
       
