@@ -34,7 +34,7 @@ const server = net.createServer((socket) => {
         const userAgent = request.split("\r\n")[2];
         const userAgentMessage = userAgent.split(": ")[1];
         console.log(userAgentMessage);
-        response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${userAgentMessage.length}\r\n\r\n${userAgentMessage}`;
+        response = `HTTP/1.1 404 Not Found\r\nContent-Type:text/plain\r\nContent-Length:${userAgentMessage.length}\r\n\r\n${userAgentMessage}`;
         changeResponse(response);
         break;
 
