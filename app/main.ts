@@ -27,6 +27,11 @@ const server = net.createServer((socket) => {
         response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
         changeResponse(response);
         break;
+      case "pear":
+      //   const message = path.slice(6);
+        response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:4\r\n\r\npear`;
+        changeResponse(response);
+        break;
       case "user-agent":
         const userAgent = request.split("\r\n")[2];
         const userAgentMessage = userAgent.split(": ")[1];
