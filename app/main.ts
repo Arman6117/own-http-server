@@ -12,7 +12,7 @@ const server = net.createServer((socket) => {
     const body = headersAndBody[1]
   
     console.log(body)
-   //  socket.write(response)
+    socket.write(body)
  })
 
 
