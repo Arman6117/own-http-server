@@ -16,22 +16,16 @@ const server = net.createServer((socket) => {
     if (userAgent) {
       const message = userAgent[1];
 
-      if (path.startsWith("/echo/")) {
-        const message = path.slice(6);
-        const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
-        socket.write(response);
-      }
-      const length = message.length;
-      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${length}\r\n\r\n${message}`;
+      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
 
       socket.write(response);
     } else if (path === "/") {
       const response = `HTTP/1.1 200 OK\r\n\r\n`;
       socket.write(response);
-      //  } else if (path.startsWith("/echo/")) {
-      //    const message = path.slice(6);
-      //    const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
-      //    socket.write(response);
+    } else if (path.startsWith("/echo/")) {
+      const message = path.slice(6);
+      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
+      socket.write(response);
     } else {
       const response = `HTTP/1.1 404 Not Found\r\n\r\n`;
       socket.write(response);
