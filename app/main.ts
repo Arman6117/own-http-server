@@ -58,7 +58,7 @@ const server = net.createServer((socket) => {
       default:
          const defaultMessage = path.split('/')[1];
          
-         response = `HTTP/1.1 404 Not Found6\r\nContent-Type:text/plain\r\nContent-Length:${defaultMessage.length}\r\n\r\n${defaultMessage}`;
+         response = `HTTP/1.1 404 Not Found\r\nContent-Type:text/plain\r\nContent-Length:${defaultMessage.length}\r\n\r\n${defaultMessage}`;
          changeResponse(response);
     }
   });
