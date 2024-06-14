@@ -39,8 +39,9 @@ const server = net.createServer((socket) => {
         break;
 
       default:
-         const defaultMessage = path
-         response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${path.length-1}\r\n\r\n${path}`;
+         const defaultMessage = path.split('/')[1];
+         
+         response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${defaultMessage.length}\r\n\r\n${defaultMessage}`;
          changeResponse(response);
     }
   });
