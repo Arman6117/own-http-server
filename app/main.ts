@@ -17,7 +17,7 @@ const server = net.createServer((socket) => {
       const message = userAgent[1];
 
       const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
-
+console.log(response)
       socket.write(response);
     } else if (path === "/") {
       const response = `HTTP/1.1 200 OK\r\n\r\n`;
