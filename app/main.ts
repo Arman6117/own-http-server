@@ -44,8 +44,16 @@ const server = net.createServer((socket) => {
       const [___, absPath] = args;
       const filePath = absPath  + fileName;
       
-      const content = fs.readFileSync(filePath);
-      console.log(content);
+      try {
+        
+        const content = fs.readFileSync(filePath);
+        response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${content.length}\r\n\r\n${content}`
+        changeResponse(response);
+      } catch (error) {
+        response = `HTTP/1.1 404 Not Found6\r\n\r\n`
+        changeResponse(response);
+      }
+      
          
       default:
          const defaultMessage = path.split('/')[1];
