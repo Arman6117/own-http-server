@@ -7,21 +7,13 @@ console.log("Logs from your program will appear here!");
 const server = net.createServer((socket) => {
   socket.on("data", (data) => {
     const request = data.toString();
-    const headersAndBody = request.split("\r\n\r\n");
-    const headers = headersAndBody[0].split("\r\n");
-    const body = headersAndBody[1];
 
-    const headerContentLength = headers.find((header) =>
-      header.startsWith("Content-Length")
-    );
+    const path = request.split(' ')[1]
 
-    if (headerContentLength) {
-      const contentLength = headerContentLength.split(":")[1].trim();
-      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${contentLength}\r\n\r\n${body} `
-
-      socket.write(response)
-    }
-
+    const message = path.slice(6);
+    const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`
+ 
+    socket.write(response)
   });
 });
 
