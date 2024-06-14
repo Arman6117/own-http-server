@@ -42,7 +42,7 @@ const server = net.createServer((socket) => {
       const args = process.argv.slice(2);
       const [_, __, fileName] = path.split("/");
       const [___, absPath] = args;
-      const filePath = absPath + "/" + fileName;
+      const filePath = absPath  + fileName;
         console.log(filePath)
          
       default:
