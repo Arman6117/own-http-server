@@ -12,19 +12,18 @@ const server = net.createServer((socket) => {
     const userAgent = headers.split(": ");
 
     const path = request.split(" ")[1];
-
-    if (userAgent) {
-      const message = userAgent[1];
-
-      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
-console.log(response)
-      socket.write(response);
-    } else if (path === "/") {
+    if (path === "/") {
       const response = `HTTP/1.1 200 OK\r\n\r\n`;
       socket.write(response);
     } else if (path.startsWith("/echo/")) {
       const message = path.slice(6);
       const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
+      socket.write(response);
+    } else if (userAgent) {
+      const message = userAgent[1];
+
+      const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${message.length}\r\n\r\n${message}`;
+
       socket.write(response);
     } else {
       const response = `HTTP/1.1 404 Not Found\r\n\r\n`;
