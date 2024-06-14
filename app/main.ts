@@ -13,7 +13,7 @@ const server = net.createServer((socket) => {
 //     socket.write(response)
 //  })
 
-const responseContent = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:9\r\n\r\nabc` 
+const responseContent = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:9\r\n\r\nraspberry` 
 socket.write(responseContent)
 });
 
