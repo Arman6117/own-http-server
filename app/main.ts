@@ -9,7 +9,7 @@ const server = net.createServer((socket) => {
     const request = data.toString();
 
 
-    const headers = request.split('\r\n').find(header => header.startsWith('user-agent'))
+    const headers = request.split('\r\n').find(header => header.startsWith('User-Agent:'))
     const userAgent = headers?.split(': ')[1]
 
     if(userAgent) {
