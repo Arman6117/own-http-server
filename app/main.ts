@@ -1,5 +1,5 @@
 import * as net from "net";
-
+import * as fs from 'fs'
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 console.log("Logs from your program will appear here!");
 
@@ -37,11 +37,15 @@ const server = net.createServer((socket) => {
         response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${userAgentMessage.length}\r\n\r\n${userAgentMessage}`;
         changeResponse(response);
         break;
-
+      
+      case 'files' : 
+        const filePath = path
+        console.log(filePath);
+         
       default:
          const defaultMessage = path.split('/')[1];
          
-         response = `HTTP/1.1 404 Not Found\r\nContent-Type:text/plain\r\nContent-Length:${defaultMessage.length}\r\n\r\n${defaultMessage}`;
+         response = `HTTP/1.1 404 Not Found6\r\nContent-Type:text/plain\r\nContent-Length:${defaultMessage.length}\r\n\r\n${defaultMessage}`;
          changeResponse(response);
     }
   });
