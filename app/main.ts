@@ -10,6 +10,7 @@ const server = net.createServer((socket) => {
     const path = request.split(" ")[1];
     const params = path.split("/")[1];
 
+    console.log(request)
     let response: string;
 
     const changeResponse = (response: string) => {
