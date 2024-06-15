@@ -12,6 +12,8 @@ const server = net.createServer((socket) => {
 
     const method = request.split("/")[0];
 
+    console.log("Called method "+method);
+    
     let response: string;
 
     const changeResponse = (response: string) => {
