@@ -1,5 +1,6 @@
 import * as net from "net";
 import * as fs from "fs";
+import * as fPath from 'path'
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 console.log("Logs from your program will appear here!");
 
@@ -65,7 +66,7 @@ const server = net.createServer((socket) => {
 
       case "POST":
         const [_,dirName,fileName] = path.split('/')
-        const filePath = dirName + "/" + fileName;
+        const filePath = fPath.join(__dirname, fileName);
 
         const body = requestLines[4]
         try {
