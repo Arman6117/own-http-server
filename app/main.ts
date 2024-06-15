@@ -7,13 +7,12 @@ console.log("Logs from your program will appear here!");
 const server = net.createServer((socket) => {
   socket.on("data", (data) => {
     const request = data.toString();
-    const path = request.split(" ")[1];
+    const requestLines = request.split("\r\n");
+    const [method, path] = requestLines[0].split(" ");
     const params = path.split("/")[1];
 
-    const method = request.split("/")[0];
+    console.log("Called method " + method);
 
-    console.log("Called method "+method);
-    
     let response: string;
 
     const changeResponse = (response: string) => {
@@ -64,8 +63,8 @@ const server = net.createServer((socket) => {
             changeResponse(response);
         }
 
-        case "POST": 
-         console.log('Called')
+      case "POST":
+        console.log("Called");
     }
   });
 });
