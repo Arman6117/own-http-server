@@ -31,20 +31,23 @@ const server = net.createServer((socket) => {
           case "echo":
             const message = path.slice(6);
 
-            const [____, encodingType] = requestLines[2].split(": ");
-            const acceptEncoding = requestLines.find(line => line.startsWith("Accept-Encoding: "))
-           
-            let encoding:string;
-            if(acceptEncoding) {
-              const encoding = acceptEncoding.split(": ")[1].split(', ')
-              console.log(encoding)
+            // const [____, encodingType] = requestLines[2].split(": ");
+            const acceptEncoding = requestLines.find((line) =>
+              line.startsWith("Accept-Encoding: ")
+            );
+
+            let encoding = ''
+            if (acceptEncoding) {
+              const encodings = acceptEncoding.split(": ")[1].split(", ");
+              if (encodings.includes('gzip')) {
+                encoding = 'gzip';
+              }
             }
-            if (encodingType !== 'gzip') {
-              response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
+            if (encoding === "gzip") {
+              response = `HTTP/1.1 200 OK\r\nContent-Encoding:${encoding}\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
               changeResponse(response);
-             
             } else {
-              response = `HTTP/1.1 200 OK\r\nContent-Encoding:${encodingType}\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
+              response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
               changeResponse(response);
             }
             break;
