@@ -66,8 +66,10 @@ const server = net.createServer((socket) => {
 
       case "POST":
         const [_, dirName, fileName] = path.split("/");
-        const filePath = fPath.join(__dirname, fileName);
+        const directoryPath = process.argv[3]
+        const filePath = `${directoryPath}/${fileName}`
 
+        console.log(filePath)
         const body = requestLines[4];
         try {
           fs.writeFileSync(filePath, body);
