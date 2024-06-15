@@ -68,7 +68,13 @@ const server = net.createServer((socket) => {
         const filePath = dirName + "/" + fileName;
 
         const body = requestLines[4]
-        console.log("logged body" + body.length)
+        try {
+          
+          fs.writeFileSync(filePath,body)
+          console.log("Done")
+        } catch (error) {
+          console.log(error)
+        }
     }
   });
 });
