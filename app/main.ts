@@ -68,7 +68,7 @@ const server = net.createServer((socket) => {
         const filePath = dirName + "/" + fileName;
 
         const body = requestLines[4]
-        console.log("logged body" + body)
+        console.log("logged body" + body.length)
     }
   });
 });
