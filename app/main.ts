@@ -66,10 +66,10 @@ const server = net.createServer((socket) => {
 
       case "POST":
         const [_, dirName, fileName] = path.split("/");
-        const directoryPath = process.argv[3]
-        const filePath = `${directoryPath}/${fileName}`
+        const directoryPath = process.argv[3];
+        const filePath = `${directoryPath}/${fileName}`;
 
-        console.log(filePath)
+        console.log(filePath);
         const body = requestLines[4];
         try {
           fs.writeFileSync(filePath, body);
@@ -83,4 +83,4 @@ const server = net.createServer((socket) => {
   });
 });
 
-server.listen(4221, "localhost");
+server.listen(4221, "localhost", () => console.log("listening on port"));
