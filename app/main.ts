@@ -45,6 +45,7 @@ const server = net.createServer((socket) => {
             }
             if (encoding === "gzip") {
               zlib.gzip(message, (err, buffer) => {
+                console.log(buffer)
                 if (err)
                   changeResponse(`HTTP/1.1 500 Internal Server Error\r\n\r\n`);
 
