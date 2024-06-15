@@ -67,7 +67,7 @@ const server = net.createServer((socket) => {
         const [_,dirName,fileName] = path.split('/')
         const filePath = dirName + "/" + fileName;
 
-        const body = requestLines[1]
+        const body = requestLines
         console.log("logged body" + body)
     }
   });
