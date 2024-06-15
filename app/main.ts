@@ -31,8 +31,8 @@ const server = net.createServer((socket) => {
           case "echo":
             const message = path.slice(6);
 
-            const encoding = requestLines[2].split(": ")
-            console.log(encoding)
+            const [____,encodingType] = requestLines[2].split(": ")
+            console.log(encodingType)
             response = `HTTP/1.1 200 OK\r\nContent-Encoding:gZip\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
             changeResponse(response);
             break;
