@@ -64,7 +64,7 @@ const server = net.createServer((socket) => {
         }
 
       case "POST":
-        console.log(process.argv)
+        console.log(path)
     }
   });
 });
