@@ -31,10 +31,15 @@ const server = net.createServer((socket) => {
           case "echo":
             const message = path.slice(6);
 
-            const [____,encodingType] = requestLines[2].split(": ")
-            console.log(encodingType)
-            response = `HTTP/1.1 200 OK\r\nContent-Encoding:${encodingType}\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
-            changeResponse(response);
+            const [____, encodingType] = requestLines[2].split(": ");
+
+            if (encodingType !== "invalid-encoding") {
+              response = `HTTP/1.1 200 OK\r\nContent-Encoding:${encodingType}\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
+              changeResponse(response);
+            } else {
+              response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
+              changeResponse(response);
+            }
             break;
 
           case "user-agent":
