@@ -1,6 +1,6 @@
 import * as net from "net";
 import * as fs from "fs";
-import * as fPath from "path";
+import * as zlib from "zlib";
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 console.log("Logs from your program will appear here!");
 
@@ -36,16 +36,21 @@ const server = net.createServer((socket) => {
               line.startsWith("Accept-Encoding: ")
             );
 
-            let encoding = ''
+            let encoding = "";
             if (acceptEncoding) {
               const encodings = acceptEncoding.split(": ")[1].split(", ");
-              if (encodings.includes('gzip')) {
-                encoding = 'gzip';
+              if (encodings.includes("gzip")) {
+                encoding = "gzip";
               }
             }
             if (encoding === "gzip") {
-              response = `HTTP/1.1 200 OK\r\nContent-Encoding:${encoding}\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
-              changeResponse(response);
+              zlib.gzip(message, (err, buffer) => {
+                if (err)
+                  changeResponse(`HTTP/1.1 500 Internal Server Error\r\n\r\n`);
+
+                response = `HTTP/1.1 200 OK\r\nContent-Encoding:${encoding}\r\nContent-Type:text/plain\r\nContent-Length:${buffer.length}\r\n\r\n${buffer}`;
+                changeResponse(response);
+              });
             } else {
               response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
               changeResponse(response);
