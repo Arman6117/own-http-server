@@ -65,7 +65,10 @@ const server = net.createServer((socket) => {
 
       case "POST":
         const [_,dirName,fileName] = path.split('/')
-        console.log(dirName)
+        const filePath = dirName + "/" + fileName;
+
+        const body = requestLines[0].split(',')
+        console.log(body)
     }
   });
 });
