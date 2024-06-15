@@ -32,9 +32,13 @@ const server = net.createServer((socket) => {
             const message = path.slice(6);
 
             const [____, encodingType] = requestLines[2].split(": ");
-
+            const acceptEncoding = requestLines.find(line => line.startsWith("Accept-Encoding: "))
            
-            console.log
+            let encoding:string;
+            if(acceptEncoding) {
+              const encoding = acceptEncoding.split(": ")[1].split(', ')
+              console.log(encoding)
+            }
             if (encodingType !== 'gzip') {
               response = `HTTP/1.1 200 OK\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
               changeResponse(response);
@@ -90,6 +94,7 @@ const server = net.createServer((socket) => {
           response = `HTTP/1.1 400 Bad Request\r\n\r\n`;
           changeResponse(response);
         }
+        break;
     }
   });
 });
