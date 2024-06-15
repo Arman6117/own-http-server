@@ -1,6 +1,6 @@
 import * as net from "net";
 import * as fs from "fs";
-import * as fPath from 'path'
+import * as fPath from "path";
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 console.log("Logs from your program will appear here!");
 
@@ -65,16 +65,17 @@ const server = net.createServer((socket) => {
         }
 
       case "POST":
-        const [_,dirName,fileName] = path.split('/')
+        const [_, dirName, fileName] = path.split("/");
         const filePath = fPath.join(__dirname, fileName);
 
-        const body = requestLines[4]
+        const body = requestLines[4];
         try {
-          
-          fs.writeFileSync(filePath,body)
-          console.log("Done")
+          fs.writeFileSync(filePath, body);
+          response = `HTTP/1.1 201 Created\r\n\r\n`;
+          changeResponse(response);
         } catch (error) {
-          console.log(error)
+          response = `HTTP/1.1 400 Bad Request\r\n\r\n`;
+          changeResponse(response);
         }
     }
   });
