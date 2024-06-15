@@ -33,6 +33,7 @@ const server = net.createServer((socket) => {
 
             const [____, encodingType] = requestLines[2].split(": ");
 
+            console.log(encodingType)
             if (encodingType !== "invalid-encoding") {
               response = `HTTP/1.1 200 OK\r\nContent-Encoding:${encodingType}\r\nContent-Type:text/plain\r\nContent-Length:${message.length}\r\n\r\n${message}`;
               changeResponse(response);
